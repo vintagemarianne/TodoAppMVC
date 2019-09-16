@@ -3,10 +3,10 @@ class Model {
         this.tasks = [];
     }
 
-    addTask(task) {
+    addTask(newTask) {
         const task = {
             id: this.tasks.length > 0 ? this.tasks.length + 1 : 1,
-            title: task,
+            title: newTask,
             completed: false
         };
 
@@ -109,3 +109,15 @@ class View {
 
     }
 }
+
+class Controller {
+    constructor(model, view){
+        this.model = model;
+        this.view = view;
+    }
+}
+
+const model = new Model();
+const view = new View();
+const app = new Controller(model, view);
+
