@@ -1,4 +1,5 @@
-const model = new Model();
-const view = new View();
-const app = new Controller(model, view);
-
++function(app) {
+    const model = new app.Model();
+    const view = new app.View();
+    const application = new app.Controller(model, view);
+}(app);

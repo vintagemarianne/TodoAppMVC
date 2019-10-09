@@ -185,18 +185,18 @@ function deleteTask() {
     element2.parentNode.removeChild(element2);
 
     if (!allTasksList.hasChildNodes()) {
-        allTasksList.innerHTML = "<li class='default-item'>Nothing to do.</li>";
+        // allTasksList.innerHTML = "<li class='default-item'>Nothing to do.</li>";
         itemId = 0;
     }
 
     if (!inProgressList.hasChildNodes()) {
-        inProgressList.innerHTML = "<li class='default-item'>Nothing in progress.</li>";
+        // inProgressList.innerHTML = "<li class='default-item'>Nothing in progress.</li>";
         itemId = 0;
 
     }
 
     if (!completedList.hasChildNodes()) {
-        completedList.innerHTML = "<li class='default-item'>Nothing completed.</li>";
+        // completedList.innerHTML = "<li class='default-item'>Nothing completed.</li>";
         itemId = 0;
         completedItem = 0;
     } else {
