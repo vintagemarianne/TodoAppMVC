@@ -1,22 +1,24 @@
-+function(app) {
-    app.Controller = class {
-        constructor(model, view) {
-            this.model = model;
-            this.view = view;
-            this.onItemsChanged(this.model.items);
-            this.view.bindAddItem(this.handleAddItem)
-            // this.view.bindDeleteTodo(this.handleDeleteTodo)
-            // this.view.bindToggleTodo(this.handleToggleTodo)
-        }
++ function (model, view) {
     
-        onItemsChanged = items => this.view.displayLists(items);
-    
-        handleAddItem = value => this.model.addItem(value)
-    
-        handleEditItem = (id, value) => this.model.editItem(id, value);
-    
-        handleDeleteItem = id => this.model.deleteItem(id);
-    
-        handleCompleteItem = id => this.model.completeItem(id);
-    }
-}(app);
+    model = model;
+    view = view;
+
+    onItemsChanged(model.items);
+
+    model.bindTodoListChanged(onItemsChanged);
+
+    view.bindAddItem(handleAddItem);
+    view.bindDeleteItem(handleDeleteItem);
+    view.bindCompleteItem(handleCompleteItem);
+
+    function onItemsChanged (items) {view.displayLists(items); }
+
+    function handleAddItem (value) {model.addItem(value); }
+
+    function handleEditItem (id, value) {model.editItem(id, value); }
+
+    function handleDeleteItem (id) {model.deleteItem(id); }
+
+    function handleCompleteItem (id) {model.completeItem(id); }
+
+}(model, view);

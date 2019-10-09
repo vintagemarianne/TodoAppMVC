@@ -1,43 +1,50 @@
-+function(app) {
-    app.Model = function () {
-        constructor() {
-            this.items = [];
-        }
-    
-        addItem(v) {
-            const item = {
-                id: this.items.length,
++ function (model) {
+
+    model.items = [];
+
+    model.addItem = function (v) {
+        const item = {
+            id: model.items.length,
+            text: v,
+            completed: false
+        };
+        model.items.push(item);
+        onTodoListChanged(model.items);
+    }
+
+    model.deleteItem = function (id) {
+        model.items = model.items.filter( item => {
+            return item.id !== id;
+        })
+        onTodoListChanged(model.items);
+    }
+
+    model.editItem = function (id, v) {
+        model.items = model.items.map(item => {
+            item.id === id ? {
+                id: item.id,
                 text: v,
-                completed: false
-            };
-            this.items.push(item);
-        }
-    
-        deleteItem(id) {
-            this.items = this.items.filter( item => {
-                item.id !== id
-            });
-        }
-    
-        editItem(id, v) {
-            this.items = this.items.map( item => {
-                item.id === id ? {
-                    id: item.id,
-                    text: v,
-                    completed: item.completed
-                } : item;
-            })
-        }
-    
-        completeItem(id) {
-            this.items = this.items.map( item => {
-                item.id === id ? {
+                completed: item.completed
+            } : item;
+        })
+        onTodoListChanged(model.items);
+    }
+
+    model.completeItem = function (id) {
+        model.items = model.items.map( item => {
+            if(item.id === id) {
+                return {
                     id: item.id,
                     text: item.text,
-                    completed: true
-                } : item;
-            })
-        }
-    
+                    completed: !item.completed
+                }
+            } else return item;
+        })
+        console.log(model.items)
+        onTodoListChanged(model.items);
     }
-}(app);
+
+    model.bindTodoListChanged = function (callback) {
+        onTodoListChanged = callback;
+    }
+}(model);
