@@ -19,10 +19,10 @@
         </div>
     </div>
     <div class="main-body">
-        <div class="tab-btn-wrapper">
-            <button class="tablinks tablinks-active" onclick="changeTab(event, 'allTasksTab')">All Tasks</button>
-            <button class="tablinks" onclick="changeTab(event, 'inProgressTab')">Active</button>
-            <button class="tablinks" onclick="changeTab(event, 'completedTab')">Completed</button>
+        <div class="tab-btn-wrapper" id="tabBar">
+            <button class="tablinks tablinks-active">All Tasks</button>
+            <button class="tablinks">Active</button>
+            <button class="tablinks">Completed</button>
         </div>
 
 
@@ -57,13 +57,10 @@
     </div>
 
     <script>
-        var app = {},
-            model = {},
-            view = {},
-            controller = {};
+        var model = {},
+            view = {};
     </script>
 
-    <script src="app/js/app.js"></script>
     <script src="app/js/model.js"></script>
     <script src="app/js/view.js"></script>
     <script src="app/js/controller.js"></script>
