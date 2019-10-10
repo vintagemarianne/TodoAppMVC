@@ -10,6 +10,7 @@
     view.bindAddItem(handleAddItem);
     view.bindDeleteItem(handleDeleteItem);
     view.bindCompleteItem(handleCompleteItem);
+    view.bindEditItem(handleEditItem);
 
     function onItemsChanged (items) {view.displayLists(items); }
 

@@ -20,12 +20,14 @@
     }
 
     model.editItem = function (id, v) {
-        model.items = model.items.map(item => {
-            item.id === id ? {
-                id: item.id,
-                text: v,
-                completed: item.completed
-            } : item;
+        model.items = model.items.map( item => {
+            if(item.id === id) {
+                return {
+                    id: item.id,
+                    text: v,
+                    completed: item.completed
+                }
+            } else return item;
         })
         onTodoListChanged(model.items);
     }
@@ -40,7 +42,6 @@
                 }
             } else return item;
         })
-        console.log(model.items)
         onTodoListChanged(model.items);
     }
 
