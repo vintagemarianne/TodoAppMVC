@@ -58,7 +58,7 @@
         return element;
     }
 
-    function createTodoItem(item) {
+    function createTodoItem(item, id) {
         const listItem = createElement("li", "item");
         const taskTitleWrapper = createElement("div", "task-title-wrapper");
         const taskControlsWrapper = createElement("div", "task-controls-wrapper");
@@ -74,7 +74,7 @@
         completeBtn.title = "Completed";
         editBtn.title = "Edit";
         taskTitle.textContent = item.text;
-        listItem.id = item.id;
+        listItem.id = id;
 
         taskTitleWrapper.appendChild(itemIcon);
         taskTitleWrapper.appendChild(taskTitle);
@@ -101,17 +101,50 @@
         view._elm.completedList.innerHTML = "<li class='default-item'>Nothing completed.</li>";
     }
 
+    function createAllTasksList(items) {
+        items.forEach(item => {
+            const id = "item1_" + item.id;
+            const listItem = createTodoItem(item, id);
+            view._elm.allTasksList.appendChild(listItem);
+        })
+        if (!view._elm.allTasksList.hasChildNodes())
+            view._elm.allTasksList.innerHTML = "<li class='default-item'>Nothing to do.</li>";
+    }
+
+    function createInProgressList(items) {
+        items.forEach(item => {
+            if (!item.completed) {
+                const id = "item2_" + item.id;
+                const listItem = createTodoItem(item, id);
+                view._elm.inProgressList.appendChild(listItem);
+            }
+        })
+        if (!view._elm.inProgressList.hasChildNodes())
+            view._elm.inProgressList.innerHTML = "<li class='default-item'>Nothing in progress.</li>";
+    }
+
+    function createCompletedList(items) {
+        items.forEach(item => {
+            if (item.completed) {
+                const id = "item3_" + item.id;
+                const listItem = createTodoItem(item, id);
+                view._elm.completedList.appendChild(listItem);
+            }
+        })
+        if (!view._elm.completedList.hasChildNodes())
+            view._elm.completedList.innerHTML = "<li class='default-item'>Nothing completed.</li>";
+
+    }
+
     view.displayLists = function (items) {
         if (!items.length) {
             emptyLists();
             return;
         }
         initializeLists();
-        view._elm.allTasksList.innerHTML = "";
-        items.forEach(item => {
-            const listItem = createTodoItem(item);
-            view._elm.allTasksList.appendChild(listItem);
-        })
+        createAllTasksList(items);
+        createInProgressList(items);
+        createCompletedList(items);
     }
 
     view.bindAddItem = function (handler) {
@@ -126,7 +159,8 @@
     view.bindDeleteItem = function (handler) {
         view._elm.allTasksList.addEventListener('click', event => {
             if (event.target.className === 'btn delete-btn') {
-                const id = parseInt(event.target.parentElement.parentElement.id);
+                var id = event.target.parentElement.parentElement.id;
+                id = parseInt(id.substr(6, id.length - 1));
                 handler(id);
             }
         })
@@ -140,7 +174,8 @@
 
         view._elm.allTasksList.addEventListener('click', event => {
             if (event.target.className === 'btn complete-btn') {
-                const id = parseInt(event.target.parentElement.parentElement.id);
+                var id = event.target.parentElement.parentElement.id;
+                id = parseInt(id.substr(6, id.length - 1));
                 handler(id);
             }
         })
