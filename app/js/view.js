@@ -5,22 +5,22 @@
         inputField: document.getElementById("input"),
         allTasksList: document.getElementById('allTasksList'),
         inProgressList: document.getElementById('inProgressList'),
-        completedTab: document.getElementById('completedList'),
+        completedList: document.getElementById('completedList'),
         allTasksTab: document.getElementById('allTasksTab'),
         inProgressTab: document.getElementById('inProgressTab'),
-        completedList: document.getElementById('completedTab'),
+        completedTab: document.getElementById('completedTab'),
         addBtn: document.getElementById('addBtn'),
         tabBar: document.getElementById('tabBar'),
         tabs: document.getElementsByClassName('tablinks')
     }
 
-    
+
     view._elm.tabBar.onclick = function (e) {
         switch (e.target.textContent) {
             case 'All Tasks':
+                view._elm.allTasksTab.style.display = "block";
                 view._elm.inProgressTab.style.display = "none";
                 view._elm.completedTab.style.display = "none";
-                view._elm.allTasksTab.style.display = "block";
                 view._elm.tabs[1].className = view._elm.tabs[1].className.replace(" tablinks-active", "");
                 view._elm.tabs[2].className = view._elm.tabs[2].className.replace(" tablinks-active", "");
                 e.target.className += " tablinks-active";
@@ -34,8 +34,8 @@
                 e.target.className += " tablinks-active";
                 break;
             case 'Completed':
-                view._elm.inProgressTab.style.display = "none";
                 view._elm.completedTab.style.display = "block";
+                view._elm.inProgressTab.style.display = "none";
                 view._elm.allTasksTab.style.display = "none";
                 view._elm.tabs[0].className = view._elm.tabs[0].className.replace(" tablinks-active", "");
                 view._elm.tabs[1].className = view._elm.tabs[1].className.replace(" tablinks-active", "");
