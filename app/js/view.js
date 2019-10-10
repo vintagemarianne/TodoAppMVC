@@ -15,8 +15,11 @@
         tabs: document.getElementsByClassName('tablinks'),
         editModal: document.getElementById('editModal'),
         editInputField: document.getElementById('modalInput'),
-        modalBtn: document.getElementById('modalBtn')
+        modalBtn: document.getElementById('modalBtn'),
+        closeModalIcon: document.getElementById('closeModalIcon')
     }
+
+    view._elm.closeModalIcon.onclick = function () {closeModal(); }
 
     view._elm.tabBar.onclick = function (e) {
         switch (e.target.textContent) {
@@ -152,7 +155,6 @@
         })
         if (!view._elm.completedList.hasChildNodes())
             view._elm.completedList.innerHTML = "<li class='default-item'>Nothing completed.</li>";
-
     }
 
     view.displayLists = function (items) {
@@ -195,7 +197,6 @@
             }
         })
         view._elm.modalBtn.addEventListener('click', function() {
-            closeModal()
             if (getEditInput()) {
                 handler(id, getEditInput());
                 resetEditInput();
