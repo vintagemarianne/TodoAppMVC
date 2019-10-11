@@ -4,7 +4,7 @@
 
     model.addItem = function (v) {
         const item = {
-            id: model.items.length,
+            id: model.items.length !== 0 ? model.items[model.items.length - 1].id + 1 : 1,
             text: v,
             completed: false
         };
