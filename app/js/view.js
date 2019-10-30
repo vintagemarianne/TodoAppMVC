@@ -29,9 +29,9 @@
             editInputField: el('modalInput'),
             modalBtn: el('modalBtn'),
             closeModalIcon: el('closeModalIcon'),
-            // tab0: el('tab0'),
-            // tab1: el('tab1'),
-            // tab2: el()
+            tab0: el('tab0'),
+            tab1: el('tab1'),
+            tab2: el('tab2')
         };
 
         _elements.closeModalIcon.addEventListener('click', closeModal);
@@ -91,23 +91,23 @@
     function filter(e) {
         console.log(e.target.getAttribute('value'))
         _listeners.filter(parseInt(e.target.getAttribute('value')));
-        // switch (e.target.getAttribute('value')) {
-        //     case 'All Tasks':
-        //         _elements.tabs[1].className = _elements.tabs[1].className.replace(" tablinks-active", "");
-        //         _elements.tabs[2].className = _elements.tabs[2].className.replace(" tablinks-active", "");
-        //         e.target.className += " tablinks-active";
-        //         break;
-        //     case 'Active':
-        //         _elements.tabs[0].className = _elements.tabs[0].className.replace(" tablinks-active", "");
-        //         _elements.tabs[2].className = _elements.tabs[2].className.replace(" tablinks-active", "");
-        //         e.target.className += " tablinks-active";
-        //         break;
-        //     case 'Completed':
-        //         _elements.tabs[0].className = _elements.tabs[0].className.replace(" tablinks-active", "");
-        //         _elements.tabs[1].className = _elements.tabs[1].className.replace(" tablinks-active", "");
-        //         e.target.className += " tablinks-active";
-        //         break;
-        // }
+        switch (e.target.getAttribute('value')) {
+            case '0':
+                _elements.tab1.className = _elements.tab1.className.replace(" tablinks-active", "");
+                _elements.tab2.className = _elements.tab2.className.replace(" tablinks-active", "");
+                e.target.className += " tablinks-active";
+                break;
+            case '1':
+                _elements.tab0.className = _elements.tab0.className.replace(" tablinks-active", "");
+                _elements.tab2.className = _elements.tab2.className.replace(" tablinks-active", "");
+                e.target.className += " tablinks-active";
+                break;
+            case '2':
+                _elements.tab0.className = _elements.tab0.className.replace(" tablinks-active", "");
+                _elements.tab1.className = _elements.tab1.className.replace(" tablinks-active", "");
+                e.target.className += " tablinks-active";
+                break;
+        }
     }
 
     function createElement(tag, className) {

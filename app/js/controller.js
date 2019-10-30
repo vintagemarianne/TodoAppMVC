@@ -30,7 +30,6 @@
         _model.todos = _model.todos.filter( item => {
             return item.title !== todo.title;
         });
-        console.log(_model.todos)
         render();
     }
 
