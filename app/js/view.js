@@ -78,9 +78,8 @@
     }
 
     function editTodo(item) {
-        var value = _elements.editInputField.value;
-
         _elements.modalBtn.addEventListener('click', function (e) {
+            var value = _elements.editInputField.value;
             if (!value) return;
             _listeners.edit(item, value);
             _elements.editInputField.value = '';
@@ -89,7 +88,6 @@
     }
 
     function filter(e) {
-        console.log(e.target.getAttribute('value'))
         _listeners.filter(parseInt(e.target.getAttribute('value')));
         switch (e.target.getAttribute('value')) {
             case '0':
