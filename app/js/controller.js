@@ -28,8 +28,9 @@
 
     function deleteTodo(todo) {
         _model.todos = _model.todos.filter( item => {
-            item.title !== todo.title;
+            return item.title !== todo.title;
         });
+        console.log(_model.todos)
         render();
     }
 
