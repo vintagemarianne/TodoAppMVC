@@ -58,8 +58,6 @@
         createList(todos);
     }
 
-    // ====================================================================
-
     function closeModal() {
         _elements.editModal.style.display = 'none';
     }
@@ -81,6 +79,7 @@
         _elements.modalBtn.addEventListener('click', function (e) {
             var value = _elements.editInputField.value;
             if (!value) return;
+
             _listeners.edit(item, value);
             _elements.editInputField.value = '';
             closeModal();

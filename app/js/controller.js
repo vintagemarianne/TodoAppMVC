@@ -38,8 +38,6 @@
         render();
     }
 
-    // ==================================================================
-
     function render() {
         var filter = _model.filter,
             filteredTodos = _model.todos.filter(function (t) {
