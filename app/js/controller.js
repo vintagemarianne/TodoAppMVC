@@ -5,9 +5,12 @@
 
     var _model;
     function init() {
-        _model = { todos: [], filter: 0 };
+        _model = { todos: [], filter: 0};
+        var jsonModel = JSON.parse(localStorage.getItem('model'));
+        if(jsonModel) _model = jsonModel;
         app.view.init([addTodo, completeTodo, editTodo, deleteTodo, filterTodos]);
         render();
+        app.view.changeTab(_model.filter + '');
     }
 
     function addTodo(value) {
@@ -39,6 +42,9 @@
     }
 
     function render() {
+        localStorage.setItem('model', JSON.stringify(_model));
+        console.log(JSON.parse(localStorage.getItem('model')));
+        console.log(_model.filter)
         var filter = _model.filter,
             filteredTodos = _model.todos.filter(function (t) {
                 if (filter === 0) return true;
