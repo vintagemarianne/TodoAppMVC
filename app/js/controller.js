@@ -5,9 +5,12 @@
 
     var _model;
     function init() {
-        _model = { todos: [], filter: 0};
-        var jsonModel = JSON.parse(localStorage.getItem('model'));
-        if(jsonModel) _model = jsonModel;
+        var jsonModel = getLocalStorage('model');
+        if(jsonModel) {
+            _model = jsonModel;
+        } else {
+            _model = { todos: [], filter: 0};
+        }
         app.view.init([addTodo, completeTodo, editTodo, deleteTodo, filterTodos]);
         render();
         app.view.changeTab(_model.filter + '');
@@ -42,15 +45,21 @@
     }
 
     function render() {
-        localStorage.setItem('model', JSON.stringify(_model));
-        console.log(JSON.parse(localStorage.getItem('model')));
-        console.log(_model.filter)
+        setLocalStorage('model', _model);
         var filter = _model.filter,
             filteredTodos = _model.todos.filter(function (t) {
                 if (filter === 0) return true;
                 return filter === 1 ? !t.completed : t.completed;
             });
         app.view.render(filteredTodos, filter);
+    }
+
+    function setLocalStorage(item, obj) {
+        localStorage.setItem(item, JSON.stringify(obj));
+    }
+
+    function getLocalStorage(item) {
+        return JSON.parse(localStorage.getItem(item));
     }
 
 }(app));
